@@ -3,9 +3,15 @@ const Person = require("./Person");
 const Quiz = require("./Quiz");
 const Result = require("./Result");
 const Storage = require("./Storage");
-const data = require("./data.json");
+const History = require("./History");
+const data = require("./data-copy.json");
 
-let { questions, options, points } = data;
+let { questions, options, points, results } = data;
+questions = reInstantiate(Quiz, questions);
+
+function reInstantiate(_class, arrayOfObjects) {
+  return arrayOfObjects.map((object) => new _class(object));
+}
 
 async function start() {
   let quizMenu = await Menu.create();

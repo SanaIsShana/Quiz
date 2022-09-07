@@ -30,17 +30,18 @@ module.exports = class Storage {
     let filePath = path.join(__dirname, "data-copy.json");
     let jsonDataFromFile = fs.readFileSync(filePath, "utf-8");
     let data = JSON.parse(jsonDataFromFile);
-    let rawData = {
-      results: [
-        {
-          name: person,
-          time: this.dateAndTime,
-          match: resultInPCT,
-        },
-      ],
-    };
 
-    data.push(rawData);
+    let rawData = {
+      name: person,
+      time: this.dateAndTime,
+      match: resultInPCT,
+    };
+    if (data.hasOwnProperty("results")) {
+      data.results.push(rawData);
+    } else {
+      data.results = [];
+      data.results.push(rawData);
+    }
     let dataAsJson = JSON.stringify(data);
     fs.writeFileSync(filePath, dataAsJson, "utf-8");
   }
