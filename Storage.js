@@ -25,7 +25,7 @@ module.exports = class Storage {
     return this.dataAndTime;
   }
 
-  static async storeResultToJson(person, resultInPCT) {
+  static async storeResultToJson(person, result) {
     await this.getDateAndTime();
     let filePath = path.join(__dirname, "data-copy.json");
     let jsonDataFromFile = fs.readFileSync(filePath, "utf-8");
@@ -34,7 +34,7 @@ module.exports = class Storage {
     let rawData = {
       name: person,
       time: this.dateAndTime,
-      match: resultInPCT,
+      match: result,
     };
     if (data.hasOwnProperty("results")) {
       data.results.push(rawData);

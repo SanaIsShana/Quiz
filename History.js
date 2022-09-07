@@ -2,8 +2,8 @@ const fs = require("fs");
 const path = require("path");
 
 module.exports = class History {
-  constructor(settings) {
-    Object.assign(this, settings);
+  constructor(h) {
+    this.h = h;
   }
   static async create() {
     let instance = new History();
@@ -11,5 +11,12 @@ module.exports = class History {
     return instance;
   }
 
-  async getAllHistory() {}
+  static async getAllHistory(fullName, allResults) {
+    let allHistory = [];
+    for (let result of allResults) {
+      if (result.result.name == fullName) {
+        allHistory.push(result.result.time + result.result.match);
+      }
+    }
+  }
 };

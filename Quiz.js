@@ -1,10 +1,8 @@
 const promptly = require("promptly");
 
 module.exports = class Quiz {
-  answers = [];
-
-  constructor(questions) {
-    Object.assign(this, questions);
+  constructor() {
+    this.answersFromQuiz = [];
   }
 
   static async create(questions, options) {
@@ -27,7 +25,7 @@ module.exports = class Quiz {
       );
       i++;
       console.clear();
-      this.answers.push(answer);
+      this.answersFromQuiz.push(answer);
     }
   }
 };

@@ -1,9 +1,8 @@
 const promptly = require("promptly");
 
 module.exports = class Person {
-  fullName = " ";
-  constructor(settings) {
-    Object.assign(this, settings);
+  constructor(fullName) {
+    this.fullName = fullName;
   }
   // This replaces/complements the normal constructor
   // a constructor can not be async, but if we need to create an instance
@@ -23,7 +22,5 @@ module.exports = class Person {
     console.clear();
 
     this.fullName = firstName + " " + lastName;
-
-    console.log("Hej " + this.fullName + "!");
   }
 };
