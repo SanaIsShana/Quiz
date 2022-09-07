@@ -11,7 +11,7 @@ module.exports = class Menu {
 
   async showMenu() {
     this.menuOption = await promptly.prompt(
-      "Välj ett alternativ att fortsätta quizzet: \n 1. Ny Quiz 2. Min Historik"
+      "Välj ett alternativ att fortsätta quizzet: \n 1. Ny Quiz 2. Min Historik \nVälj:"
     );
   }
 };

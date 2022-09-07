@@ -94,16 +94,20 @@
 
     "options": [
         {
-            "text": "Instämmer helt"
+            "text": "Instämmer helt",
+            "value": "2"
         },
         {
-            "text": "Instämmer delvis"
+            "text": "Instämmer delvis",
+            "value": "1"
         },
         {
-            "text":  "Delvis emot"
+            "text":  "Delvis emot",
+            "value": "-1"
         },
         {
-            "text":  "Helt emot"
+            "text":  "Helt emot",
+            "value": "-2"
         }
     ],
 

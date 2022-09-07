@@ -18,10 +18,10 @@ module.exports = class Person {
 
   async askName() {
     this.name = [
-      await promptly.prompt("Firstname?"),
-      await promptly.prompt("Lastname?"),
+      await promptly.prompt("Förnamn?"),
+      await promptly.prompt("Efternamn?"),
     ];
-    console.clear(); //clears the console
+    console.clear();
     console.log("Hej " + this.name + "!");
   }
 };
