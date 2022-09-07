@@ -1,7 +1,7 @@
 const promptly = require("promptly");
 
 module.exports = class Person {
-  name = { firstName: "", lastName: "" };
+  fullName = " ";
   constructor(settings) {
     Object.assign(this, settings);
   }
@@ -17,11 +17,13 @@ module.exports = class Person {
   }
 
   async askName() {
-    this.name = [
-      await promptly.prompt("Förnamn?"),
-      await promptly.prompt("Efternamn?"),
-    ];
+    const firstName = await promptly.prompt("Förnamn?");
+    const lastName = await promptly.prompt("Efternamn?");
+
     console.clear();
-    console.log("Hej " + this.name + "!");
+
+    this.fullName = firstName + " " + lastName;
+
+    console.log("Hej " + this.fullName + "!");
   }
 };

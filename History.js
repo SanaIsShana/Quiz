@@ -5,21 +5,10 @@ module.exports = class History {
   //should be able to get the persons all result
   constructor() {}
   static async create() {
-    let instance = new Menu();
+    let instance = new History();
     await instance.showMenu();
     return instance;
   }
-  // function readJsonFile(filename) {
-  //   let filePath = path.join(__dirname, filename);
-  //   let jsonDataFromFile = fs.readFileSync(filePath, "utf-8");
-  //   let data = JSON.parse(jsonDataFromFile);
-  //   return data;
-  // }
-
-  // // let someData = [{ name: "Kalle" }, { name: "Olle" }];
-  // // storeAsJsonFile("myData.json", someData);
-  // let someDataFromFile = readJsonFile("myData.json");
-  // console.log(someDataFromFile[1].name);
 
   async showMenu() {
     this.menuOption = await promptly.prompt(
