@@ -1,6 +1,7 @@
 const promptly = require("promptly");
 
 module.exports = class Menu {
+  //this can be static as well probebly
   constructor(menuOption) {
     this.menuOption = menuOption;
   }

@@ -22,6 +22,7 @@ module.exports = class App {
       let quiz = await Quiz.create(questions, options);
 
       let resultCalculator = await Calculator.create(
+        //also can change Calculator static method here instead of declaing a new Object
         quiz.answersFromQuiz,
         questions
       );
@@ -37,7 +38,7 @@ module.exports = class App {
     }
 
     if (quizMenu.menuOption == 2) {
-      let playerForHistory = await Person.create();
+      let playerForHistory = await Person.create(); //To do, maybe can change the static methods?
       let resultsFromJson = await Storage.readJsonFile();
       await Result.showResultHistory(
         playerForHistory.fullName,

@@ -3,6 +3,7 @@ module.exports = class Calculator {
     this.quizResult = [];
   }
   static async create(answers, points) {
+    //this can be removed!
     let instance = new Calculator();
     await instance.checkResult(answers, points);
     return instance;
