@@ -16,8 +16,17 @@ module.exports = class Person {
   }
 
   async askName() {
-    const firstName = await promptly.prompt("Förnamn?");
-    const lastName = await promptly.prompt("Efternamn?");
+    const validator = function (value) {
+      let regex = new RegExp("^^[a-zA-ZäöåÄÖÅ]+$");
+      if (!regex.test(value)) {
+        throw new Error("Fel inmatning!");
+      }
+
+      return value;
+    };
+
+    const firstName = await promptly.prompt("Förnamn?", { validator });
+    const lastName = await promptly.prompt("Efternamn?", { validator });
 
     console.clear();
 

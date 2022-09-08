@@ -4,15 +4,24 @@ module.exports = class Menu {
   constructor(menuOption) {
     this.menuOption = menuOption;
   }
-  static async create(menuOption) {
+  static async start() {
     let instance = new Menu();
-    await instance.showMenu(menuOption);
+    await instance.getMenu();
     return instance;
   }
 
-  async showMenu() {
+  async getMenu() {
+    const validator = function (value) {
+      let list = [1, 2, 3];
+      if (!list.includes(+value)) {
+        throw new Error("Fel inmatning!");
+      }
+
+      return value;
+    };
     this.menuOption = await promptly.prompt(
-      "Välj ett alternativ att fortsätta quizzet: \n 1. Ny Quiz 2. Min Historik \nVälj:"
+      "Välj ett alternativ: \n 1. Ny Quiz 2. Min Historik 3.Avsluta Quizzet \nVälj:",
+      { validator }
     );
     return this.menuOption;
   }
