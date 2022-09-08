@@ -1,20 +1,12 @@
-const data = require("./data-copy.json");
 const Person = require("./Person");
 const Result = require("./Result");
 const Storage = require("./Storage");
-const Question = require("./Question");
+const Quiz = require("./Quiz");
 const Menu = require("./Menu");
 const Calculator = require("./Calculator");
+const data = require("./data-copy.json");
 
-// Parsing json into class instance
-// (Refactor into utility class later?)
-let { questions, options, results } = data;
-listOfQuestions = reInstantiate(Question, questions);
-results = reInstantiate(Result, results);
-
-function reInstantiate(_class, arrayOfObjects) {
-  return arrayOfObjects.map((object) => new _class(object));
-}
+let { questions, options } = data;
 
 module.exports = class App {
   static async create() {
@@ -27,7 +19,8 @@ module.exports = class App {
     let quizMenu = await Menu.start();
     if (quizMenu.menuOption == 1) {
       let newPlayer = await Person.create();
-      let quiz = await Question.create(questions, options);
+      let quiz = await Quiz.create(questions, options);
+
       let resultCalculator = await Calculator.create(
         quiz.answersFromQuiz,
         questions
@@ -37,20 +30,27 @@ module.exports = class App {
         newPlayer.fullName,
         resultCalculator.quizResult
       );
-
-      await results[results.length - 1].showResult();
+      let resultsFromJson = await Storage.readJsonFile();
+      await Result.showResult(resultsFromJson["results"]);
 
       await this.nextTurn();
     }
+
     if (quizMenu.menuOption == 2) {
       let playerForHistory = await Person.create();
-      await Result.showResultHistory(playerForHistory.fullName, results);
+      let resultsFromJson = await Storage.readJsonFile();
+      await Result.showResultHistory(
+        playerForHistory.fullName,
+        resultsFromJson["results"]
+      );
       await this.nextTurn();
     }
+
     if (quizMenu.menuOption == 3) {
       process.exit();
     }
   }
+
   async nextTurn() {
     await this.start();
   }

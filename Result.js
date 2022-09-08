@@ -3,14 +3,19 @@ module.exports = class Result {
     Object.assign(this, settings);
   }
 
-  async showResult() {
-    console.log("Namn: " + this.name + ", Time: " + this.time);
-    this.match.forEach((value) => {
+  static async showResult(results) {
+    let quizResult = results[results.length - 1];
+    console.log("Namn: " + quizResult.name + ", Time: " + quizResult.time);
+    quizResult.match.forEach((value) => {
       console.log(value);
     });
   }
 
   static async showResultHistory(person, allResults) {
+    if (allResults == undefined) {
+      console.log("Tyvär! Det finns ingen historik!");
+      return;
+    }
     let allHistoryResults = [];
     for (let result of allResults) {
       if (person.toUpperCase() == result.name.toUpperCase()) {

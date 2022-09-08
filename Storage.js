@@ -29,4 +29,11 @@ module.exports = class Storage {
     let dataAsJson = JSON.stringify(data);
     fs.writeFileSync(filePath, dataAsJson, "utf-8");
   }
+
+  static async readJsonFile() {
+    let filePath = path.join(__dirname, "data-copy.json");
+    let jsonDataFromFile = fs.readFileSync(filePath, "utf-8");
+    this.quizResultData = JSON.parse(jsonDataFromFile);
+    return this.quizResultData;
+  }
 };

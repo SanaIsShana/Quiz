@@ -1,18 +1,17 @@
 const promptly = require("promptly");
 
-module.exports = class Question {
-  answersFromQuiz = [];
-  constructor(settings) {
-    Object.assign(this, settings);
+module.exports = class Quiz {
+  constructor() {
+    this.answersFromQuiz = [];
   }
 
-  static async create(options) {
-    let instance = new Question();
+  static async create(questions, options) {
+    let instance = new Quiz();
     await instance.askAllQuestions(questions, options);
     return instance;
   }
 
-  async askAllQuestions(options) {
+  async askAllQuestions(questions, options) {
     let optionsToString = "";
     options.map((x) => {
       optionsToString += options.indexOf(x) + 1 + ". " + x.text + "\n";
