@@ -16,15 +16,11 @@ module.exports = class App {
       let newPerson = await Person.create();
       let quiz = await Quiz.create(questions, options);
 
-      let resultCalculator = await Calculator.create(
-        quiz.answersFromQuiz,
-        questions,
-        options
-      );
+      await Calculator.checkResult(quiz.answersFromQuiz, questions, options);
 
       await Storage.storeResultToJson(
         newPerson.fullName,
-        resultCalculator.quizResult
+        Calculator.quizResult
       );
 
       await Storage.readJsonFile();
