@@ -4,55 +4,55 @@ const Storage = require("./Storage");
 const Quiz = require("./Quiz");
 const Menu = require("./Menu");
 const Calculator = require("./Calculator");
-const data = require("./data-copy.json");
+const data = require("./data.json");
 
 let { questions, options } = data;
 
 module.exports = class App {
-  static async create() {
-    let instance = new App();
-    await instance.start();
-    return instance;
-  }
+  static async start() {
+    await Menu.askMenuOption();
 
-  async start() {
-    let quizMenu = await Menu.start();
-    if (quizMenu.menuOption == 1) {
-      let newPlayer = await Person.create();
+    if (Menu.menuOption == 1) {
+      let newPerson = await Person.create();
       let quiz = await Quiz.create(questions, options);
 
       let resultCalculator = await Calculator.create(
-        //also can change Calculator static method here instead of declaing a new Object
         quiz.answersFromQuiz,
-        questions
+        questions,
+        options
       );
 
       await Storage.storeResultToJson(
-        newPlayer.fullName,
+        newPerson.fullName,
         resultCalculator.quizResult
       );
-      let resultsFromJson = await Storage.readJsonFile();
-      await Result.showResult(resultsFromJson["results"]);
 
-      await this.nextTurn();
+      await Storage.readJsonFile();
+      await Result.showResult(Storage.quizResultData["results"]);
+
+      await App.nextTurn();
     }
 
-    if (quizMenu.menuOption == 2) {
-      let playerForHistory = await Person.create(); //To do, maybe can change the static methods?
-      let resultsFromJson = await Storage.readJsonFile();
+    if (Menu.menuOption == 2) {
+      let personForHistory = await Person.create();
+      await Storage.readJsonFile();
+
       await Result.showResultHistory(
-        playerForHistory.fullName,
-        resultsFromJson["results"]
+        personForHistory.fullName,
+        Storage.quizResultData["results"]
       );
-      await this.nextTurn();
+      await App.nextTurn();
     }
 
-    if (quizMenu.menuOption == 3) {
+    if (Menu.menuOption == 3) {
+      console.log(
+        "\nDet är tråkigt att du vill lämna valkompassen, hopas att vi ses nästa riksdagsval!"
+      );
       process.exit();
     }
   }
 
-  async nextTurn() {
-    await this.start();
+  static async nextTurn() {
+    await App.start();
   }
 };

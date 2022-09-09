@@ -4,11 +4,7 @@ module.exports = class Person {
   constructor(fullName) {
     this.fullName = fullName;
   }
-  // This replaces/complements the normal constructor
-  // a constructor can not be async, but if we need to create an instance
-  // and await something (like askinf for the name)
-  // we can add a static create method and use Person.create() instead of
-  // new Person()
+
   static async create() {
     let instance = new Person();
     await instance.askName();

@@ -2,15 +2,14 @@ const fs = require("fs");
 const path = require("path");
 
 module.exports = class Storage {
-  constructor() {
-    this.quizResultData = [];
-  }
+  static quizResultData = [];
 
   static async storeResultToJson(person, result) {
     let today = new Date();
     let dateAndTime =
       today.toLocaleDateString() + " " + today.toLocaleTimeString();
-    let filePath = path.join(__dirname, "data-copy.json");
+
+    let filePath = path.join(__dirname, "data.json");
     let jsonDataFromFile = fs.readFileSync(filePath, "utf-8");
     let data = JSON.parse(jsonDataFromFile);
 
@@ -31,7 +30,7 @@ module.exports = class Storage {
   }
 
   static async readJsonFile() {
-    let filePath = path.join(__dirname, "data-copy.json");
+    let filePath = path.join(__dirname, "data.json");
     let jsonDataFromFile = fs.readFileSync(filePath, "utf-8");
     this.quizResultData = JSON.parse(jsonDataFromFile);
     return this.quizResultData;

@@ -2,90 +2,99 @@ module.exports = class Calculator {
   constructor() {
     this.quizResult = [];
   }
-  static async create(answers, points) {
-    //this can be removed!
+
+  static async create(userAnswers, points, quizOptions) {
     let instance = new Calculator();
-    await instance.checkResult(answers, points);
+    await instance.checkResult(userAnswers, points, quizOptions);
     return instance;
   }
 
-  async checkResult(answers, points) {
+  async checkResult(userAnswers, points, quizOptions) {
     let convertedAnswers = [];
-    for (let answer of answers) {
-      switch (answer) {
-        case "1":
-          convertedAnswers.push(2);
-          break;
-        case "2":
-          convertedAnswers.push(1);
-          break;
-        case "3":
-          convertedAnswers.push(-1);
-          break;
-        case "4":
-          convertedAnswers.push(-2);
+    for (let answer of userAnswers) {
+      for (let option of quizOptions) {
+        if ((answer = option.number)) {
+          convertedAnswers.push(option.value);
+        }
       }
     }
-    let distanceWithParty = {};
-    let listWithEachPoints = [];
+
+    let oneQuestionPoints = {};
+    let allQuestionsPointsList = [];
 
     for (let point of points) {
-      distanceWithParty = {};
+      oneQuestionPoints = {};
       for (const [key, value] of Object.entries(point.points)) {
         let i = points.indexOf(point);
-        distanceWithParty[key] = 4 - Math.abs(value - convertedAnswers[i]);
+        oneQuestionPoints[key] = 4 - Math.abs(value - convertedAnswers[i]);
       }
-      listWithEachPoints.push(distanceWithParty);
+      allQuestionsPointsList.push(oneQuestionPoints);
     }
-    await this.convertResult(listWithEachPoints);
+    await this.getTotalPoints(allQuestionsPointsList);
   }
 
-  async convertResult(listWithEachPoints) {
-    let allPartyPoint = { V: 0, S: 0, MP: 0, C: 0, L: 0, KD: 0, M: 0, SD: 0 };
+  async getTotalPoints(allQuestionsPointsList) {
+    let totalPointsList = {
+      V: 0,
+      S: 0,
+      MP: 0,
+      C: 0,
+      L: 0,
+      KD: 0,
+      M: 0,
+      SD: 0,
+    };
 
-    for (const [key, value] of Object.entries(listWithEachPoints)) {
-      Object.keys(allPartyPoint).forEach((keyOfAllPartyPoint) => {
-        allPartyPoint[keyOfAllPartyPoint] += value[keyOfAllPartyPoint];
+    for (const [key, value] of Object.entries(allQuestionsPointsList)) {
+      Object.keys(totalPointsList).forEach((keyTotalPoints) => {
+        totalPointsList[keyTotalPoints] += value[keyTotalPoints];
       });
     }
 
-    Object.keys(allPartyPoint).forEach((key) => {
-      allPartyPoint[key] = Math.round(allPartyPoint[key] / 1.2);
+    await this.calulatePercentage(totalPointsList);
+  }
+
+  async calulatePercentage(totalPointsList) {
+    Object.keys(totalPointsList).forEach((key) => {
+      totalPointsList[key] = Math.round(totalPointsList[key] / 1.2);
+
       switch (key) {
         case "V":
-          this.quizResult.push("Vänsterpartiet: " + allPartyPoint[key] + "%");
+          this.quizResult.push("Vänsterpartiet: " + totalPointsList[key] + "%");
           break;
         case "S":
           this.quizResult.push(
-            "Socialdemokraterna: " + allPartyPoint[key] + "%"
+            "Socialdemokraterna: " + totalPointsList[key] + "%"
           );
           break;
         case "MP":
-          this.quizResult.push("Miljöpartiet: " + allPartyPoint[key] + "%");
+          this.quizResult.push("Miljöpartiet: " + totalPointsList[key] + "%");
           break;
         case "C":
-          this.quizResult.push("Centerpartiet: " + allPartyPoint[key] + "%");
+          this.quizResult.push("Centerpartiet: " + totalPointsList[key] + "%");
           break;
         case "L":
-          this.quizResult.push("Liberalerna: " + allPartyPoint[key] + "%");
+          this.quizResult.push("Liberalerna: " + totalPointsList[key] + "%");
           break;
         case "KD":
           this.quizResult.push(
-            "Kristdemokraterna: " + allPartyPoint[key] + "%"
+            "Kristdemokraterna: " + totalPointsList[key] + "%"
           );
           break;
         case "M":
-          this.quizResult.push("Moderaterna: " + allPartyPoint[key] + "%");
+          this.quizResult.push("Moderaterna: " + totalPointsList[key] + "%");
           break;
         case "SD":
           this.quizResult.push(
-            "Sverigedemokraterna: " + allPartyPoint[key] + "%"
+            "Sverigedemokraterna: " + totalPointsList[key] + "%"
           );
       }
     });
     await this.sortTheResult();
   }
+
   async sortTheResult() {
     this.quizResult.sort((a, b) => b.slice(-3, -1) - a.slice(-3, -1));
+    return this.quizResult;
   }
 };
