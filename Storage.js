@@ -9,13 +9,11 @@ module.exports = class Storage {
     let jsonDataFromFile = fs.readFileSync(filePath, "utf-8");
     let data = JSON.parse(jsonDataFromFile);
 
-    let rawData = result;
-
     if (data.hasOwnProperty("results")) {
-      data.results.push(rawData);
+      data.results.push(result);
     } else {
       data.results = [];
-      data.results.push(rawData);
+      data.results.push(result);
     }
     let dataAsJson = JSON.stringify(data);
     fs.writeFileSync(filePath, dataAsJson, "utf-8");
