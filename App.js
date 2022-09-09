@@ -4,27 +4,25 @@ const Storage = require("./Storage");
 const Quiz = require("./Quiz");
 const Menu = require("./Menu");
 const Calculator = require("./Calculator");
-const data = require("./data.json");
-
-let { questions, options } = data;
 
 module.exports = class App {
   static async start() {
     await Menu.askMenuOption();
+    await Storage.readJsonFile();
 
     if (Menu.menuOption == 1) {
       let newPerson = await Person.create();
-      let quiz = await Quiz.create(questions, options);
+      let quiz = await Quiz.create(newPerson.fullName, Storage.dataFromJson);
 
-      await Calculator.checkResult(quiz.answersFromQuiz, questions, options);
-
-      await Storage.storeResultToJson(
+      await Calculator.checkResult(quiz.answersFromQuiz, Storage.dataFromJson);
+      let newResult = await Result.create(
         newPerson.fullName,
-        Calculator.quizResult
+        Calculator.answersInPercentage
       );
 
+      await Storage.storeResultToJson(newResult);
+
       await Storage.readJsonFile();
-      await Result.showResult(Storage.quizResultData["results"]);
 
       await App.nextTurn();
     }
@@ -35,7 +33,7 @@ module.exports = class App {
 
       await Result.showResultHistory(
         personForHistory.fullName,
-        Storage.quizResultData["results"]
+        Storage.dataFromJson
       );
       await App.nextTurn();
     }

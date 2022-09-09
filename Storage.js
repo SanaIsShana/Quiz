@@ -2,22 +2,14 @@ const fs = require("fs");
 const path = require("path");
 
 module.exports = class Storage {
-  static quizResultData = [];
+  static dataFromJson;
 
-  static async storeResultToJson(person, result) {
-    let today = new Date();
-    let dateAndTime =
-      today.toLocaleDateString() + " " + today.toLocaleTimeString();
-
+  static async storeResultToJson(result) {
     let filePath = path.join(__dirname, "data.json");
     let jsonDataFromFile = fs.readFileSync(filePath, "utf-8");
     let data = JSON.parse(jsonDataFromFile);
 
-    let rawData = {
-      name: person,
-      time: dateAndTime,
-      match: result,
-    };
+    let rawData = result;
 
     if (data.hasOwnProperty("results")) {
       data.results.push(rawData);
@@ -32,7 +24,7 @@ module.exports = class Storage {
   static async readJsonFile() {
     let filePath = path.join(__dirname, "data.json");
     let jsonDataFromFile = fs.readFileSync(filePath, "utf-8");
-    this.quizResultData = JSON.parse(jsonDataFromFile);
-    return this.quizResultData;
+    this.dataFromJson = JSON.parse(jsonDataFromFile);
+    return this.dataFromJson;
   }
 };

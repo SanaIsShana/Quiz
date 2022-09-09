@@ -1,23 +1,27 @@
 const promptly = require("promptly");
 
 module.exports = class Quiz {
-  constructor() {
+  constructor(person) {
     this.answersFromQuiz = [];
+    this.person = person;
   }
 
-  static async create(questions, options) {
+  static async create(person, jsonData) {
     let instance = new Quiz();
-    await instance.askAllQuestions(questions, options);
+    let questions = jsonData.questions;
+    let options = jsonData.options;
+    await instance.askAllQuestions(person, questions, options);
     return instance;
   }
 
-  async askAllQuestions(questions, options) {
+  async askAllQuestions(person, questions, options) {
     let optionsToString = "";
+    let i = 1;
+
     options.map((x) => {
       optionsToString += options.indexOf(x) + 1 + ". " + x.text + "\n";
     });
 
-    let i = 1;
     const validator = function (value) {
       let list = [1, 2, 3, 4];
       if (!list.includes(+value)) {
@@ -27,6 +31,7 @@ module.exports = class Quiz {
       return value;
     };
 
+    console.log("Hej " + person + ", det finns 30 frågor att besvara. \n");
     for (let question of questions) {
       const answer = await promptly.prompt(
         i + ". " + question.text + "\n" + optionsToString + "\nVälj: ",

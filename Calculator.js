@@ -1,10 +1,11 @@
 module.exports = class Calculator {
-  static quizResult = [];
+  static answersInPercentage = [];
 
-  static async checkResult(userAnswers, points, quizOptions) {
+  static async checkResult(userAnswers, jsonData) {
     let convertedAnswers = [];
+    let { options, questions } = jsonData;
     for (let answer of userAnswers) {
-      for (let option of quizOptions) {
+      for (let option of options) {
         if (answer == option.number) {
           convertedAnswers.push(option.value);
         }
@@ -14,15 +15,15 @@ module.exports = class Calculator {
     let oneQuestionPoints = {};
     let allQuestionsPointsList = [];
 
-    for (let point of points) {
+    let i = 0;
+    for (let question of questions) {
       oneQuestionPoints = {};
-      for (const [key, value] of Object.entries(point.points)) {
-        let i = points.indexOf(point);
+      for (const [key, value] of Object.entries(question.points)) {
         oneQuestionPoints[key] = 4 - Math.abs(value - convertedAnswers[i]);
       }
+      i++;
       allQuestionsPointsList.push(oneQuestionPoints);
     }
-
     await Calculator.getTotalPoints(allQuestionsPointsList);
   }
 
@@ -52,48 +53,50 @@ module.exports = class Calculator {
 
       switch (key) {
         case "V":
-          Calculator.quizResult.push(
+          Calculator.answersInPercentage.push(
             "Vänsterpartiet: " + totalPointsList[key] + "%"
           );
           break;
         case "S":
-          Calculator.quizResult.push(
+          Calculator.answersInPercentage.push(
             "Socialdemokraterna: " + totalPointsList[key] + "%"
           );
           break;
         case "MP":
-          Calculator.quizResult.push(
+          Calculator.answersInPercentage.push(
             "Miljöpartiet: " + totalPointsList[key] + "%"
           );
           break;
         case "C":
-          Calculator.quizResult.push(
+          Calculator.answersInPercentage.push(
             "Centerpartiet: " + totalPointsList[key] + "%"
           );
           break;
         case "L":
-          Calculator.quizResult.push(
+          Calculator.answersInPercentage.push(
             "Liberalerna: " + totalPointsList[key] + "%"
           );
           break;
         case "KD":
-          Calculator.quizResult.push(
+          Calculator.answersInPercentage.push(
             "Kristdemokraterna: " + totalPointsList[key] + "%"
           );
           break;
         case "M":
-          Calculator.quizResult.push(
+          Calculator.answersInPercentage.push(
             "Moderaterna: " + totalPointsList[key] + "%"
           );
           break;
         case "SD":
-          Calculator.quizResult.push(
+          Calculator.answersInPercentage.push(
             "Sverigedemokraterna: " + totalPointsList[key] + "%"
           );
       }
     });
 
-    Calculator.quizResult.sort((a, b) => b.slice(-3, -1) - a.slice(-3, -1));
-    return Calculator.quizResult;
+    Calculator.answersInPercentage.sort(
+      (a, b) => b.slice(-3, -1) - a.slice(-3, -1)
+    );
+    return Calculator.answersInPercentage;
   }
 };

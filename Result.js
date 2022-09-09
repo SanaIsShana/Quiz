@@ -1,13 +1,26 @@
 module.exports = class Result {
-  static async showResult(results) {
-    let quizResult = results[results.length - 1];
-    console.log("Namn: " + quizResult.name + ", Time: " + quizResult.time);
-    quizResult.match.forEach((value) => {
+  constructor(person, match) {
+    this.person = person;
+    this.match = match;
+    let today = new Date();
+    this.time = today.toLocaleDateString() + " " + today.toLocaleTimeString();
+  }
+
+  static async create(person, match) {
+    let instance = new Result(person, match);
+    await instance.showResult(person, match);
+    return instance;
+  }
+
+  async showResult() {
+    console.log("Namn: " + this.person + ", Time: " + this.time);
+    this.match.forEach((value) => {
       console.log(value);
     });
   }
 
-  static async showResultHistory(person, allResults) {
+  static async showResultHistory(person, dataFromJson) {
+    let allResults = dataFromJson.results;
     let allHistoryResults = [];
 
     if (allResults == undefined) {

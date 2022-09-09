@@ -415,60 +415,18 @@
   ],
   "results": [
     {
-      "name": "Shana Shana",
-      "time": "09/09/2022 13:58:18",
+      "person": "Sana Barilad",
       "match": [
-        "Kristdemokraterna: 60%",
-        "Liberalerna: 58%",
-        "Centerpartiet: 56%",
-        "Miljöpartiet: 54%",
-        "Vänsterpartiet: 53%",
-        "Sverigedemokraterna: 53%",
-        "Moderaterna: 52%",
-        "Socialdemokraterna: 51%"
-      ]
-    },
-    {
-      "name": "Shana Shana",
-      "time": "09/09/2022 15:29:30",
-      "match": [
-        "Miljöpartiet: 63%",
-        "Socialdemokraterna: 59%",
-        "Centerpartiet: 59%",
-        "Vänsterpartiet: 56%",
-        "Liberalerna: 53%",
+        "Sverigedemokraterna: 63%",
+        "Socialdemokraterna: 58%",
+        "Kristdemokraterna: 53%",
         "Moderaterna: 53%",
-        "Sverigedemokraterna: 51%",
-        "Kristdemokraterna: 42%"
-      ]
-    },
-    {
-      "name": "Lila Andersson",
-      "time": "09/09/2022 15:35:23",
-      "match": [
-        "Centerpartiet: 66%",
-        "Liberalerna: 63%",
-        "Miljöpartiet: 61%",
-        "Moderaterna: 55%",
-        "Socialdemokraterna: 54%",
-        "Sverigedemokraterna: 54%",
-        "Vänsterpartiet: 53%",
-        "Kristdemokraterna: 50%"
-      ]
-    },
-    {
-      "name": "Erik Fredriksson",
-      "time": "09/09/2022 15:42:12",
-      "match": [
-        "Socialdemokraterna: 67%",
-        "Miljöpartiet: 58%",
-        "Vänsterpartiet: 57%",
-        "Liberalerna: 56%",
-        "Moderaterna: 54%",
-        "Sverigedemokraterna: 53%",
-        "Centerpartiet: 52%",
-        "Kristdemokraterna: 48%"
-      ]
+        "Vänsterpartiet: 51%",
+        "Liberalerna: 48%",
+        "Miljöpartiet: 46%",
+        "Centerpartiet: 44%"
+      ],
+      "time": "10/09/2022 01:00:09"
     }
   ]
 }
