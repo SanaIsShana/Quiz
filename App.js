@@ -42,7 +42,7 @@ module.exports = class App {
 
     if (Menu.menuOption == 3) {
       console.log(
-        "\nDet är tråkigt att du vill lämna valkompassen, hopas att vi ses nästa riksdagsval!"
+        "\nDet är tråkigt att du vill lämna valkompassen, hoppas att vi ses nästa riksdagsval!"
       );
       process.exit();
     }
