@@ -15,16 +15,16 @@ module.exports = class Person {
     this.results.push(result);
   }
 
-  async showResultHistory(allHistory) {
+  async showResultHistory(historyList) {
 
-    if (allHistory == undefined) {
+    if (historyList == undefined) {
       console.log("Tyvär! Det finns ingen historik!");
     }
 
-    const nameFound = allHistory.some((history) => history.fullName.toUpperCase() === this.fullName.toUpperCase());
+    const nameFound = historyList.some((history) => history.fullName.toUpperCase() === this.fullName.toUpperCase());
 
     if (nameFound) {
-      for (let history of allHistory) {  //Loop through all history and find the person's results
+      for (let history of historyList) {  //Loop through all history and find the person's results
         if (this.fullName.toUpperCase() == history.fullName.toUpperCase()) {
           console.log(this.fullName + "s historik: ");
           for (let result of history.results) {
