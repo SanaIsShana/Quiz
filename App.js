@@ -8,14 +8,15 @@ const Calculator = require("./Calculator");
 module.exports = class App {
   static async start() {
     await Menu.askMenuOption();
-    await Storage.readJsonFile();
 
     if (Menu.menuOption == 1) {
       await Menu.askName();
       let newPerson = await Person.create(Menu.personName);
-      let quiz = await Quiz.create(newPerson, Storage.dataFromJson);
 
-      await Calculator.checkResult(quiz.personAnswers, Storage.dataFromJson);
+      await Storage.readJsonFile("quiz");
+      let quiz = await Quiz.create(newPerson, Storage.jsonData);
+
+      await Calculator.checkResult(quiz.personAnswers, Storage.jsonData);
 
       let newResult = await Result.create(
         newPerson, Calculator.convertedAnswers
@@ -25,8 +26,6 @@ module.exports = class App {
 
       await Storage.storeResultToJson(newPerson);
 
-      await Storage.readJsonFile();
-
       await App.nextTurn();
     }
 
@@ -35,8 +34,8 @@ module.exports = class App {
       await Menu.askName();
       let personForHistory = await Person.create(Menu.personName);
       
-      await Storage.readJsonFile();
-      await personForHistory.showResultHistory(Storage.dataFromJson);
+      await Storage.readJsonFile("history");
+      await personForHistory.showResultHistory(Storage.jsonData);
       await App.nextTurn();
     }
 

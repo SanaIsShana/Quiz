@@ -1,27 +1,25 @@
 const promptly = require("promptly");
 
 module.exports = class Quiz {
-  constructor(person) {
+  constructor(questions, options) {
+    this.questions = questions;
+    this.options = options;
     this.personAnswers = [];
-    this.person = person;
   }
 
-  static async create(person, jsonData) {
-    let instance = new Quiz();
-    await instance.askAllQuestions(person, jsonData);
+  static async create(person, quiz) {
+    let instance = new Quiz(quiz.questions, quiz.options);
+    await instance.askAllQuestions(person);
     return instance;
   }
 
-  async askAllQuestions(person, jsonData) {
-    let questions = jsonData.questions;
-    let options = jsonData.options;
-   
+  async askAllQuestions(person) {
     let optionsToString = "";
     let i = 1;
     let answers = [];
 
-    for (let option of options) { 
-      optionsToString += options.indexOf(option) + 1 + ". " + option.text + "\n";
+    for (let option of this.options) { 
+      optionsToString += this.options.indexOf(option) + 1 + ". " + option.text + "\n";
     }
 
     const validator = function (value) {
@@ -34,7 +32,7 @@ module.exports = class Quiz {
     };
 
     console.log("Hej " + person.fullName + ", det finns 30 frågor att besvara. \n");
-    for (let question of questions) {
+    for (let question of this.questions) {
       const answer = await promptly.prompt(
         i + ". " + question.text + "\n" + optionsToString + "\nVälj: ",
         { validator }
@@ -43,12 +41,12 @@ module.exports = class Quiz {
       console.clear();
       answers.push(answer);
     }
-    await this.converAnswersToPoints(answers, options);
+    await this.converAnswersToPoints(answers);
   }
 
-  async converAnswersToPoints(answers, options) {
+  async converAnswersToPoints(answers) {
     for (let answer of answers) {
-      for (let option of options) {
+      for (let option of this.options) {
         if (answer == option.number) {
           this.personAnswers.push(option.value);
         }

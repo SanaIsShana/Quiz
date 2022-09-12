@@ -15,17 +15,18 @@ module.exports = class Person {
     this.results.push(result);
   }
 
-  async showResultHistory(dataFromJson) {
-    let historyResults = dataFromJson.results;
-  
-    if (historyResults == undefined) {
+  async showResultHistory(allHistory) {
+
+    if (allHistory == undefined) {
       console.log("Tyvär! Det finns ingen historik!");
     }
 
-    if (historyResults.length > 0) {
-      for (let history of historyResults) {
+    const nameFound = allHistory.some((history) => history.fullName.toUpperCase() === this.fullName.toUpperCase());
+
+    if (nameFound) {
+      for (let history of allHistory) {  //Loop through all history and find the person's results
         if (this.fullName.toUpperCase() == history.fullName.toUpperCase()) {
-          console.log( this.fullName + "s historik: ");
+          console.log(this.fullName + "s historik: ");
           for (let result of history.results) {
             console.log("\nTid: " + result.time + "\n");
             for (let partyScore of result.match) {
@@ -34,9 +35,7 @@ module.exports = class Person {
           }
         }
       }
-    }
-
-    if (historyResults.length == 0) {
+    } else { 
       console.log("Tyvär! Det finns ingen historik!");
     }
   }

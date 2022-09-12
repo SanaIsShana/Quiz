@@ -12,7 +12,6 @@ module.exports = class Result {
   }
 
   async showNewResult(person) {
-    console.log(this.match)
     console.log("Namn: " + person.fullName + ", Time: " + this.time);
 
     this.match.forEach((value) => {
