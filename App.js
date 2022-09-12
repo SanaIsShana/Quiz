@@ -14,10 +14,11 @@ module.exports = class App {
       let newPerson = await Person.create();
       let quiz = await Quiz.create(newPerson.fullName, Storage.dataFromJson);
 
-      await Calculator.checkResult(quiz.answersFromQuiz, Storage.dataFromJson);
+      await Calculator.checkResult(quiz.personAnswers, Storage.dataFromJson);
+
       let newResult = await Result.create(
         newPerson.fullName,
-        Calculator.answersInPercentage
+        Calculator.convertedAnswers
       );
 
       await Storage.storeResultToJson(newResult);

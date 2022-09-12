@@ -8,12 +8,13 @@ module.exports = class Result {
 
   static async create(person, match) {
     let instance = new Result(person, match);
-    await instance.showResult(person, match);
+    await instance.showResult();
     return instance;
   }
 
   async showResult() {
     console.log("Namn: " + this.person + ", Time: " + this.time);
+
     this.match.forEach((value) => {
       console.log(value);
     });
