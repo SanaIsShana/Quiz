@@ -8,20 +8,21 @@ module.exports = class Quiz {
 
   static async create(person, jsonData) {
     let instance = new Quiz();
-    let questions = jsonData.questions;
-    let options = jsonData.options;
-    await instance.askAllQuestions(person, questions, options);
+    await instance.askAllQuestions(person, jsonData);
     return instance;
   }
 
-  async askAllQuestions(person, questions, options) {
+  async askAllQuestions(person, jsonData) {
+    let questions = jsonData.questions;
+    let options = jsonData.options;
+   
     let optionsToString = "";
     let i = 1;
     let answers = [];
 
-    options.map((x) => {
-      optionsToString += options.indexOf(x) + 1 + ". " + x.text + "\n";
-    });
+    for (let option of options) { 
+      optionsToString += options.indexOf(option) + 1 + ". " + option.text + "\n";
+    }
 
     const validator = function (value) {
       let list = [1, 2, 3, 4];
@@ -32,7 +33,7 @@ module.exports = class Quiz {
       return value;
     };
 
-    console.log("Hej " + person + ", det finns 30 frågor att besvara. \n");
+    console.log("Hej " + person.fullName + ", det finns 30 frågor att besvara. \n");
     for (let question of questions) {
       const answer = await promptly.prompt(
         i + ". " + question.text + "\n" + optionsToString + "\nVälj: ",
@@ -42,7 +43,7 @@ module.exports = class Quiz {
       console.clear();
       answers.push(answer);
     }
-    await this.askAllQuestions(answers, options);
+    await this.converAnswersToPoints(answers, options);
   }
 
   async converAnswersToPoints(answers, options) {

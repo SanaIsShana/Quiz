@@ -415,18 +415,61 @@
   ],
   "results": [
     {
-      "person": "Sana Barilad",
-      "match": [
-        "Sverigedemokraterna: 63%",
-        "Socialdemokraterna: 58%",
-        "Kristdemokraterna: 53%",
-        "Moderaterna: 53%",
-        "Vänsterpartiet: 51%",
-        "Liberalerna: 48%",
-        "Miljöpartiet: 46%",
-        "Centerpartiet: 44%"
+      "results": [
+        {
+          "match": [
+            "Socialdemokraterna: 62%",
+            "Sverigedemokraterna: 60%",
+            "Liberalerna: 58%",
+            "Moderaterna: 56%",
+            "Vänsterpartiet: 55%",
+            "Miljöpartiet: 53%",
+            "Kristdemokraterna: 53%",
+            "Centerpartiet: 47%"
+          ],
+          "time": "12/09/2022 13:10:27"
+        },
+        {
+          "match": [
+            "Centerpartiet: 63%",
+            "Liberalerna: 58%",
+            "Moderaterna: 56%",
+            "Socialdemokraterna: 55%",
+            "Miljöpartiet: 55%",
+            "Kristdemokraterna: 53%",
+            "Vänsterpartiet: 52%",
+            "Sverigedemokraterna: 50%"
+          ],
+          "time": "12/09/2022 13:14:31"
+        },
+        {
+          "match": [
+            "Vänsterpartiet: 57%",
+            "Sverigedemokraterna: 55%",
+            "Socialdemokraterna: 53%",
+            "Moderaterna: 53%",
+            "Kristdemokraterna: 51%",
+            "Liberalerna: 46%",
+            "Miljöpartiet: 45%",
+            "Centerpartiet: 43%"
+          ],
+          "time": "12/09/2022 13:29:16"
+        },
+        {
+          "match": [
+            "Vänsterpartiet: 60%",
+            "Socialdemokraterna: 55%",
+            "Miljöpartiet: 55%",
+            "Centerpartiet: 50%",
+            "Liberalerna: 48%",
+            "Sverigedemokraterna: 47%",
+            "Kristdemokraterna: 43%",
+            "Moderaterna: 43%"
+          ],
+          "time": "12/09/2022 13:29:45"
+        }
       ],
-      "time": "10/09/2022 01:00:09"
+      "fullName": "Shana Shana"
     }
   ]
 }

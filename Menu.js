@@ -2,6 +2,7 @@ const promptly = require("promptly");
 
 module.exports = class Menu {
   static menuOption;
+  static personName;
 
   static async askMenuOption() {
     const validator = function (value) {
@@ -19,5 +20,23 @@ module.exports = class Menu {
     );
 
     return this.menuOption;
+  }
+
+   static async askName() {
+    const validator = function (value) {
+      let regex = new RegExp("^^[a-zA-ZäöåÄÖÅ]+$");
+      if (!regex.test(value)) {
+        throw new Error("Fel inmatning!");
+      }
+
+      return value;
+    };
+
+    const firstName = await promptly.prompt("Förnamn?", { validator });
+    const lastName = await promptly.prompt("Efternamn?", { validator });
+
+    console.clear();
+
+    this.personName = firstName + " " + lastName;
   }
 };

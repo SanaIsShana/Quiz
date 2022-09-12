@@ -43,6 +43,7 @@ module.exports = class Calculator {
   }
 
   static async calulatePercentage(totalPointsList) {
+    Calculator.convertedAnswers = [];
     // Convert and store the points in array
     Object.keys(totalPointsList).forEach((key) => {
       totalPointsList[key] = Math.round(totalPointsList[key] / 1.2);

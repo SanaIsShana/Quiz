@@ -11,17 +11,19 @@ module.exports = class App {
     await Storage.readJsonFile();
 
     if (Menu.menuOption == 1) {
-      let newPerson = await Person.create();
-      let quiz = await Quiz.create(newPerson.fullName, Storage.dataFromJson);
+      await Menu.askName();
+      let newPerson = await Person.create(Menu.personName);
+      let quiz = await Quiz.create(newPerson, Storage.dataFromJson);
 
       await Calculator.checkResult(quiz.personAnswers, Storage.dataFromJson);
 
       let newResult = await Result.create(
-        newPerson.fullName,
-        Calculator.convertedAnswers
+        newPerson, Calculator.convertedAnswers
       );
 
-      await Storage.storeResultToJson(newResult);
+      newPerson.storeMyResult(newResult);
+
+      await Storage.storeResultToJson(newPerson);
 
       await Storage.readJsonFile();
 
@@ -29,13 +31,12 @@ module.exports = class App {
     }
 
     if (Menu.menuOption == 2) {
-      let personForHistory = await Person.create();
-      await Storage.readJsonFile();
 
-      await Result.showResultHistory(
-        personForHistory.fullName,
-        Storage.dataFromJson
-      );
+      await Menu.askName();
+      let personForHistory = await Person.create(Menu.personName);
+      
+      await Storage.readJsonFile();
+      await personForHistory.showResultHistory(Storage.dataFromJson);
       await App.nextTurn();
     }
 
