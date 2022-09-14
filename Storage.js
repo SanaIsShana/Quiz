@@ -9,20 +9,23 @@ module.exports = class Storage {
     let jsonDataFromFile = fs.readFileSync(filePath, "utf-8");
     let data = JSON.parse(jsonDataFromFile);
 
-    if (data.hasOwnProperty("history")) { //Check if there is results object in data.json
+    if (data.hasOwnProperty("history")) { //Check if there is history object in data.json
       let allResults = data.history;
-      
-      allResults.forEach((x) => { //Loop and check if there is history of results of the person
-        if (x.fullName.toUpperCase() == newPerson.fullName.toUpperCase()) {
-          x.results.push(newPerson.results[0]);
-        }
-        
-        else { 
-           data.history.push(newPerson);
-        }
-      })
-    }
+      const personFound = allResults.some((person) => person.fullName.toUpperCase() === newPerson.fullName.toUpperCase());
+
+      if (personFound) {
+        for (let person of allResults) { //Loop and check if there is history of results of the person
     
+          if (person.fullName.toUpperCase() === newPerson.fullName.toUpperCase()) {
+            let result = newPerson.results[0];
+            person.results.push(result);
+          } 
+        }
+      }
+      else {
+            data.history.push(newPerson);
+      }
+    }
     else {
       data.history = [];
       data.history.push(newPerson);

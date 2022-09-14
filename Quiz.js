@@ -7,8 +7,8 @@ module.exports = class Quiz {
     this.personAnswers = [];
   }
 
-  static async create(person, quiz) {
-    let instance = new Quiz(quiz.questions, quiz.options);
+  static async create(person, jsonData) {
+    let instance = new Quiz(jsonData.questions, jsonData.options);
     await instance.askAllQuestions(person);
     return instance;
   }

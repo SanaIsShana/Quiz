@@ -469,6 +469,19 @@
             "Moderaterna: 43%"
           ],
           "time": "12/09/2022 13:29:45"
+        },
+        {
+          "match": [
+            "Sverigedemokraterna: 66%",
+            "Moderaterna: 57%",
+            "Kristdemokraterna: 55%",
+            "Socialdemokraterna: 54%",
+            "Vänsterpartiet: 51%",
+            "Liberalerna: 50%",
+            "Centerpartiet: 44%",
+            "Miljöpartiet: 43%"
+          ],
+          "time": "14/09/2022 10:47:24"
         }
       ],
       "fullName": "Shana Shana"
@@ -505,6 +518,32 @@
             "Miljöpartiet: 49%"
           ],
           "time": "12/09/2022 16:14:52"
+        },
+        {
+          "match": [
+            "Centerpartiet: 57%",
+            "Kristdemokraterna: 54%",
+            "Miljöpartiet: 53%",
+            "Liberalerna: 53%",
+            "Sverigedemokraterna: 53%",
+            "Moderaterna: 51%",
+            "Socialdemokraterna: 50%",
+            "Vänsterpartiet: 48%"
+          ],
+          "time": "14/09/2022 11:18:18"
+        },
+        {
+          "match": [
+            "Socialdemokraterna: 59%",
+            "Sverigedemokraterna: 56%",
+            "Moderaterna: 55%",
+            "Liberalerna: 53%",
+            "Kristdemokraterna: 52%",
+            "Vänsterpartiet: 49%",
+            "Centerpartiet: 49%",
+            "Miljöpartiet: 44%"
+          ],
+          "time": "14/09/2022 11:19:45"
         }
       ],
       "fullName": "Sana Sunid"
@@ -513,19 +552,19 @@
       "results": [
         {
           "match": [
-            "Centerpartiet: 59%",
-            "Kristdemokraterna: 58%",
-            "Moderaterna: 58%",
-            "Sverigedemokraterna: 58%",
-            "Liberalerna: 57%",
-            "Socialdemokraterna: 51%",
-            "Vänsterpartiet: 49%",
-            "Miljöpartiet: 49%"
+            "Vänsterpartiet: 63%",
+            "Socialdemokraterna: 58%",
+            "Miljöpartiet: 55%",
+            "Sverigedemokraterna: 55%",
+            "Liberalerna: 54%",
+            "Kristdemokraterna: 48%",
+            "Moderaterna: 48%",
+            "Centerpartiet: 42%"
           ],
-          "time": "12/09/2022 16:14:52"
+          "time": "14/09/2022 11:03:35"
         }
       ],
-      "fullName": "Sana Sunid"
+      "fullName": "Sana Barilad"
     }
   ]
 }

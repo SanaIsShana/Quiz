@@ -16,7 +16,7 @@ module.exports = class App {
       await Storage.readJsonFile("quiz");
       let quiz = await Quiz.create(newPerson, Storage.jsonData);
 
-      await Calculator.checkResult(quiz.personAnswers, Storage.jsonData);
+      await Calculator.checkResult(quiz.personAnswers, quiz);
 
       let newResult = await Result.create(
         newPerson, Calculator.convertedAnswers

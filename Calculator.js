@@ -1,8 +1,8 @@
 module.exports = class Calculator {
   static convertedAnswers = [];
 
-  static async checkResult(personAnswers, jsonData) {
-    let { questions } = jsonData;
+  static async checkResult(personAnswers, quiz) {
+    let { questions } = quiz;
 
     let oneQuestionPoints = {};
     let allQuestionsPointsList = [];
