@@ -1,19 +1,20 @@
 const promptly = require("promptly");
 
 module.exports = class Quiz {
-  constructor(questions, options) {
+  constructor(person, questions, options) {
     this.questions = questions;
     this.options = options;
     this.personAnswers = [];
+    this.person = person;
   }
 
   static async create(person, jsonData) {
-    let instance = new Quiz(jsonData.questions, jsonData.options);
-    await instance.askAllQuestions(person);
+    let instance = new Quiz(person, jsonData.questions, jsonData.options);
+    await instance.askAllQuestions();
     return instance;
   }
 
-  async askAllQuestions(person) {
+  async askAllQuestions() {
     let optionsToString = "";
     let i = 1;
     let answers = [];
@@ -31,7 +32,7 @@ module.exports = class Quiz {
       return value;
     };
 
-    console.log("Hej " + person.fullName + ", det finns 30 frågor att besvara. \n");
+    console.log("Hej " + this.person.fullName + ", det finns 30 frågor att besvara. \n");
     for (let question of this.questions) {
       const answer = await promptly.prompt(
         i + ". " + question.text + "\n" + optionsToString + "\nVälj: ",

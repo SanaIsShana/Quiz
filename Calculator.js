@@ -5,7 +5,7 @@ module.exports = class Calculator {
     let { questions } = quiz;
 
     let oneQuestionPoints = {};
-    let allQuestionsPointsList = [];
+    let allQuestionsPoints = [];
 
     let i = 0;
 
@@ -16,13 +16,13 @@ module.exports = class Calculator {
         oneQuestionPoints[key] = 4 - Math.abs(value - personAnswers[i]);
       }
       i++;
-      allQuestionsPointsList.push(oneQuestionPoints);
+      allQuestionsPoints.push(oneQuestionPoints);
     }
-    await Calculator.getTotalPoints(allQuestionsPointsList);
+    await Calculator.getTotalPoints(allQuestionsPoints);
   }
 
-  static async getTotalPoints(allQuestionsPointsList) {
-    let totalPointsList = {
+  static async getTotalPoints(allQuestionsPoints) {
+    let totalPoints = {
       V: 0,
       S: 0,
       MP: 0,
@@ -34,59 +34,59 @@ module.exports = class Calculator {
     };
 
     // Get the total amount of the points
-    for (const [key, value] of Object.entries(allQuestionsPointsList)) {
-      Object.keys(totalPointsList).forEach((keyTotalPoints) => {
-        totalPointsList[keyTotalPoints] += value[keyTotalPoints];
+    for (const [key, value] of Object.entries(allQuestionsPoints)) {
+      Object.keys(totalPoints).forEach((keyTotalPoints) => {
+        totalPoints[keyTotalPoints] += value[keyTotalPoints];
       });
     }
-    await Calculator.calulatePercentage(totalPointsList);
+    await Calculator.calulatePercentage(totalPoints);
   }
 
-  static async calulatePercentage(totalPointsList) {
+  static async calulatePercentage(totalPoints) {
     Calculator.convertedAnswers = [];
     // Convert and store the points in array
-    Object.keys(totalPointsList).forEach((key) => {
-      totalPointsList[key] = Math.round(totalPointsList[key] / 1.2);
+    Object.keys(totalPoints).forEach((key) => {
+      totalPoints[key] = Math.round(totalPoints[key] / 1.2);
 
       switch (key) {
         case "V":
           Calculator.convertedAnswers.push(
-            "Vänsterpartiet: " + totalPointsList[key] + "%"
+            "Vänsterpartiet: " + totalPoints[key] + "%"
           );
           break;
         case "S":
           Calculator.convertedAnswers.push(
-            "Socialdemokraterna: " + totalPointsList[key] + "%"
+            "Socialdemokraterna: " + totalPoints[key] + "%"
           );
           break;
         case "MP":
           Calculator.convertedAnswers.push(
-            "Miljöpartiet: " + totalPointsList[key] + "%"
+            "Miljöpartiet: " + totalPoints[key] + "%"
           );
           break;
         case "C":
           Calculator.convertedAnswers.push(
-            "Centerpartiet: " + totalPointsList[key] + "%"
+            "Centerpartiet: " + totalPoints[key] + "%"
           );
           break;
         case "L":
           Calculator.convertedAnswers.push(
-            "Liberalerna: " + totalPointsList[key] + "%"
+            "Liberalerna: " + totalPoints[key] + "%"
           );
           break;
         case "KD":
           Calculator.convertedAnswers.push(
-            "Kristdemokraterna: " + totalPointsList[key] + "%"
+            "Kristdemokraterna: " + totalPoints[key] + "%"
           );
           break;
         case "M":
           Calculator.convertedAnswers.push(
-            "Moderaterna: " + totalPointsList[key] + "%"
+            "Moderaterna: " + totalPoints[key] + "%"
           );
           break;
         case "SD":
           Calculator.convertedAnswers.push(
-            "Sverigedemokraterna: " + totalPointsList[key] + "%"
+            "Sverigedemokraterna: " + totalPoints[key] + "%"
           );
       }
     });

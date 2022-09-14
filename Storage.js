@@ -16,7 +16,7 @@ module.exports = class Storage {
       if (personFound) {
         for (let person of allResults) { //Loop and check if there is history of results of the person
     
-          if (person.fullName.toUpperCase() === newPerson.fullName.toUpperCase()) {
+          if (person.fullName.toUpperCase() == newPerson.fullName.toUpperCase()) {
             let result = newPerson.results[0];
             person.results.push(result);
           } 

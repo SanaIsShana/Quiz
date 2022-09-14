@@ -544,6 +544,19 @@
             "Miljöpartiet: 44%"
           ],
           "time": "14/09/2022 11:19:45"
+        },
+        {
+          "match": [
+            "Vänsterpartiet: 58%",
+            "Socialdemokraterna: 58%",
+            "Moderaterna: 53%",
+            "Centerpartiet: 52%",
+            "Liberalerna: 51%",
+            "Kristdemokraterna: 51%",
+            "Miljöpartiet: 50%",
+            "Sverigedemokraterna: 50%"
+          ],
+          "time": "14/09/2022 11:29:55"
         }
       ],
       "fullName": "Sana Sunid"
@@ -562,9 +575,58 @@
             "Centerpartiet: 42%"
           ],
           "time": "14/09/2022 11:03:35"
+        },
+        {
+          "match": [
+            "Sverigedemokraterna: 69%",
+            "Socialdemokraterna: 58%",
+            "Moderaterna: 55%",
+            "Centerpartiet: 54%",
+            "Kristdemokraterna: 53%",
+            "Liberalerna: 50%",
+            "Miljöpartiet: 48%",
+            "Vänsterpartiet: 46%"
+          ],
+          "time": "14/09/2022 11:51:08"
         }
       ],
       "fullName": "Sana Barilad"
+    },
+    {
+      "results": [
+        {
+          "match": [
+            "Miljöpartiet: 56%",
+            "Vänsterpartiet: 54%",
+            "Sverigedemokraterna: 53%",
+            "Socialdemokraterna: 51%",
+            "Kristdemokraterna: 48%",
+            "Moderaterna: 48%",
+            "Centerpartiet: 43%",
+            "Liberalerna: 43%"
+          ],
+          "time": "14/09/2022 11:31:20"
+        }
+      ],
+      "fullName": "Erik Ohlsson"
+    },
+    {
+      "results": [
+        {
+          "match": [
+            "Socialdemokraterna: 58%",
+            "Vänsterpartiet: 55%",
+            "Sverigedemokraterna: 53%",
+            "Kristdemokraterna: 49%",
+            "Miljöpartiet: 48%",
+            "Moderaterna: 46%",
+            "Centerpartiet: 42%",
+            "Liberalerna: 41%"
+          ],
+          "time": "14/09/2022 11:46:56"
+        }
+      ],
+      "fullName": "Oscar Johansson"
     }
   ]
 }
